@@ -12,6 +12,8 @@ module.exports = class Product {
       "data",
       "products.json"
     );
+    // console.log("PATH ", p);
+
     fs.readFile(p, (err, fileContent) => {
       let products = [];
       if (!err) {
