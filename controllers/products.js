@@ -28,3 +28,13 @@ exports.getProducts = (req, res, next) => {
     });
   });
 };
+
+exports.getAdminProducts = (req, res, next) => {
+  Product.fetchAll((products) => {
+    res.render("shop/product-list", {
+      prods: products,
+      pageTitle: "Admin Products",
+      path: "/",
+    });
+  });
+};
