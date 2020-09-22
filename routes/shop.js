@@ -4,6 +4,8 @@ const express = require("express");
 
 const shopController = require("../controllers/shop");
 
+const error = require("../controllers/error");
+
 const router = express.Router();
 
 router.get("/", shopController.getIndex);

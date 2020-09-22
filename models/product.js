@@ -10,6 +10,7 @@ module.exports = class Product {
   }
 
   save() {
+    this.id = Math.random().toString();
     const p = path.join(
       path.dirname(process.mainModule.filename),
       "data",
