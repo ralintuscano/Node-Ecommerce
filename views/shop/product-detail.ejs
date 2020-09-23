@@ -9,9 +9,8 @@
         <img src="<%=product.imageUrl%>" alt="<%=product.title%>">
         <h2><%=product.price%></h2>
         <p><%=product.description%></p>
-        <form action="/cart" method="post">
-            <button class="btn">Add to Cart</button>
-            <input type="hidden" name="productId" value="<%=product.id%>">
-        </form>
+        
+        <%- include('../includes/add-to-cart.ejs')%>
+
     </main>
     <%- include('../includes/end.ejs') %>
