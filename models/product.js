@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const Cart = require("../models/cart");
 
 const p = path.join(
   path.dirname(process.mainModule.filename),
@@ -36,7 +37,7 @@ module.exports = class Product {
       getProductsFromFile((products) => {
         if (this.id) {
           const existingProductsIndex = products.findIndex(
-            (products) => prod.id === this.id
+            (prod) => prod.id === this.id
           );
           const updatedProducts = [...products];
           updatedProducts[existingProductsIndex] = this;
