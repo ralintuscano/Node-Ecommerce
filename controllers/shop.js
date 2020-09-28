@@ -15,23 +15,27 @@ exports.getProducts = (req, res, next) => {
 
 exports.getProduct = (req, res, next) => {
   const productId = req.params.productId;
-  Product.findById(productId, (product) =>
-    res.render("shop/product-detail", {
-      pageTitle: product.title,
-      product,
-      path: "/products",
-    })
-  );
+  Product.findById(productId)
+    .then(([product]) =>
+      res.render("shop/product-detail", {
+        pageTitle: product.title,
+        product: product[0],
+        path: "/products",
+      })
+    )
+    .catch((err) => console.log(err));
 };
 
 exports.getIndex = (req, res, next) => {
-  Product.fetchAll((products) => {
-    res.render("shop/index", {
-      prods: products,
-      pageTitle: "Shop",
-      path: "/",
-    });
-  });
+  Product.fetchAll()
+    .then(([rows]) => {
+      res.render("shop", {
+        prods: rows,
+        pageTitle: "shop",
+        path: "/",
+      });
+    })
+    .catch((err) => console.log(err));
 };
 
 exports.getCart = (req, res, next) => {
