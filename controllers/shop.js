@@ -17,26 +17,29 @@ exports.getProduct = (req, res, next) => {
   const productId = req.params.productId;
 
   Product.findOne({ where: { id: productId } })
-    .then((product) =>
+    .then((product) => {
+      // console.log("product details ", product);
       res.render("shop/product-detail", {
         pageTitle: product.title,
         product: product,
         path: "/products",
-      })
-    )
+      });
+    })
     .catch((err) => console.log(err));
 };
 
 exports.getIndex = (req, res, next) => {
   Product.findAll()
     .then((products) => {
-      res.render("shop/product-list", {
+      res.render("shop/index", {
         prods: products,
-        pageTitle: "All Products",
+        pageTitle: "Shop",
         path: "/",
       });
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
 exports.getCart = (req, res, next) => {
