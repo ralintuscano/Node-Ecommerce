@@ -46,7 +46,6 @@ exports.getCart = (req, res, next) => {
   req.user
     .getCart()
     .then((cart) => {
-      console.log("getCart works");
       return cart
         .getProducts()
         .then((products) => {
@@ -76,8 +75,6 @@ exports.postCart = (req, res, next) => {
   req.user
     .getCart()
     .then((cart) => {
-      console.log("Breakpoint reached.....................\n\n");
-
       fetchedCart = cart;
       return cart.getProducts({ where: { id: prodId } });
     })
@@ -90,11 +87,11 @@ exports.postCart = (req, res, next) => {
       }
       return Product.findByPk(prodId)
         .then((product) => {
-          console.log("Breakpoint reached.....................\n\n");
           fetchedCart.addProduct(product, {
             through: { quantity: newQuantity },
           });
         })
+        .then(() => res.redirect("/cart"))
         .catch((err) => console.log(err));
     })
     .catch((err) => console.log(err));
